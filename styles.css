@@ -165,7 +165,7 @@ body.is-pro .inv-watermark { display: none; }
 .billing-toggle button { border: 0; background: none; font: 600 .9rem Inter, sans-serif; padding: .55em 1.1em; border-radius: 99px; cursor: pointer; color: var(--muted); }
 .billing-toggle button.on { background: var(--brand); color: var(--brand-ink); }
 .billing-toggle small { font-weight: 500; opacity: .85; }
-.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.plans { display: grid; grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; gap: 22px; align-items: stretch; }
 @media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
 .plan { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
 .plan.featured { border: 2px solid var(--brand); box-shadow: 0 24px 50px -20px color-mix(in srgb, var(--brand) 45%, transparent); }
