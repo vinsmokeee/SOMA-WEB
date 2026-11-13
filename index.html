@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soma — Free Invoice Generator for Freelancers & Small Business</title>
+  <meta name="description" content="Create professional invoices in 60 seconds. Free invoice generator — no signup. Download as PDF, send, and get paid faster.">
+  <meta property="og:title" content="Soma — Free Invoice Generator">
+  <meta property="og:description" content="Create a professional invoice in 60 seconds. No signup. Download as PDF.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231f6f5c'/><text x='16' y='23' font-family='Georgia' font-size='20' fill='white' text-anchor='middle'>S</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Soma Invoice Generator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo"><span class="logo-mark">S</span>Soma</a>
+    <nav class="nav-links">
+      <a href="#generator">Invoice tool</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#templates">Templates</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#pricing" class="btn btn-sm btn-primary" id="navCta">Go Pro</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Free · No signup · PDF in one click</p>
+      <h1>Send a professional invoice in <em>60 seconds</em>.</h1>
+      <p class="lede">Soma is the fastest way for freelancers and small businesses to bill clients and get paid. Fill it in, download the PDF, done.</p>
+      <div class="hero-cta">
+        <a href="#generator" class="btn btn-primary btn-lg">Create free invoice</a>
+        <a href="#pricing" class="btn btn-ghost btn-lg">See Pro features</a>
+      </div>
+      <ul class="trust">
+        <li>✓ 100% free to start</li>
+        <li>✓ Your data stays in your browser</li>
+        <li>✓ 40+ currencies</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- GENERATOR -->
+  <section id="generator" class="generator">
+    <div class="wrap">
+      <div class="gen-head">
+        <h2>Invoice generator</h2>
+        <span class="plan-badge" id="planBadge">Free plan</span>
+      </div>
+
+      <div class="gen-grid">
+        <form class="panel form" id="invForm" autocomplete="off">
+          <fieldset>
+            <legend>From</legend>
+            <label>Your business name<input name="fromName" placeholder="Acme Studio"></label>
+            <label>Email / address<textarea name="fromDetails" rows="2" placeholder="hello@acme.studio&#10;12 Market St, Springfield"></textarea></label>
+            <label class="pro-field">Logo <span class="pro-tag">PRO</span>
+              <input type="file" name="logo" accept="image/*" id="logoInput">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Bill to</legend>
+            <label>Client name<input name="toName" placeholder="Client Co." list="savedClients"></label>
+            <datalist id="savedClients"></datalist>
+            <label>Client details<textarea name="toDetails" rows="2" placeholder="billing@client.co"></textarea></label>
+          </fieldset>
+
+          <fieldset class="row3">
+            <legend>Details</legend>
+            <label>Invoice #<input name="number" value="INV-0001"></label>
+            <label>Issue date<input type="date" name="date"></label>
+            <label>Due date<input type="date" name="due"></label>
+            <label>Currency
+              <select name="currency" id="currency"></select>
+            </label>
+            <label>Tax %<input type="number" name="tax" value="0" min="0" step="0.01"></label>
+            <label>Discount %<input type="number" name="discount" value="0" min="0" step="0.01"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Line items</legend>
+            <div id="items"></div>
+            <button type="button" class="btn btn-sm btn-ghost" id="addItem">+ Add item</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Notes & payment terms</legend>
+            <textarea name="notes" rows="3" placeholder="Payment via bank transfer within 14 days. Thank you!"></textarea>
+          </fieldset>
+
+          <fieldset class="pro-field">
+            <legend>Template color <span class="pro-tag">PRO</span></legend>
+            <div class="swatches" id="swatches">
+              <button type="button" data-c="#1f6f5c" style="--c:#1f6f5c" class="on" aria-label="Green"></button>
+              <button type="button" data-c="#1d4ed8" style="--c:#1d4ed8" aria-label="Blue"></button>
+              <button type="button" data-c="#111827" style="--c:#111827" aria-label="Black"></button>
+              <button type="button" data-c="#b4441f" style="--c:#b4441f" aria-label="Rust"></button>
+              <button type="button" data-c="#7c3aed" style="--c:#7c3aed" aria-label="Violet"></button>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="downloadBtn">Download PDF</button>
+            <button type="button" class="btn btn-ghost" id="saveClientBtn">Save client <span class="pro-tag">PRO</span></button>
+            <button type="button" class="btn btn-link" id="resetBtn">Reset</button>
+          </div>
+
+          <a class="sponsor" id="sponsor" target="_blank" rel="sponsored noopener"></a>
+        </form>
+
+        <div class="preview-wrap">
+          <article class="invoice" id="invoice" aria-label="Invoice preview">
+            <header class="inv-head">
+              <div>
+                <img id="pvLogo" class="inv-logo" alt="" hidden>
+                <h3 id="pvFrom">Your business</h3>
+                <p id="pvFromDetails" class="muted pre"></p>
+              </div>
+              <div class="inv-meta">
+                <h4>INVOICE</h4>
+                <p><span>No.</span> <b id="pvNumber"></b></p>
+                <p><span>Issued</span> <b id="pvDate"></b></p>
+                <p><span>Due</span> <b id="pvDue"></b></p>
+              </div>
+            </header>
+            <section class="inv-to">
+              <p class="label">Bill to</p>
+              <p><b id="pvTo">Client</b></p>
+              <p id="pvToDetails" class="muted pre"></p>
+            </section>
+            <table class="inv-table">
+              <thead><tr><th>Description</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>
+              <tbody id="pvItems"></tbody>
+            </table>
+            <div class="inv-totals">
+              <p><span>Subtotal</span><b id="pvSub"></b></p>
+              <p id="pvDiscRow"><span>Discount</span><b id="pvDisc"></b></p>
+              <p id="pvTaxRow"><span>Tax</span><b id="pvTax"></b></p>
+              <p class="grand"><span>Total due</span><b id="pvTotal"></b></p>
+            </div>
+            <p id="pvNotes" class="inv-notes pre"></p>
+            <footer class="inv-watermark" id="watermark">Created free with <b>Soma</b> — make yours at soma invoice generator</footer>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof">
+    <div class="wrap proof-grid">
+      <!-- Swap in real customer testimonials once you have them. -->
+      <blockquote><h3>⚡ Done in a minute</h3><p>No Word templates, no spreadsheets. Fill in, download PDF, send.</p></blockquote>
+      <blockquote><h3>🔒 Private by design</h3><p>No account, no upload. Your invoice data never leaves your browser.</p></blockquote>
+      <blockquote><h3>🌍 Works everywhere</h3><p>40+ currencies, tax and discounts, on desktop or phone.</p></blockquote>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="wrap">
+      <h2 class="center">Look professional. Get paid faster.</h2>
+      <p class="center lede">Start free. Upgrade when your business does.</p>
+      <div class="billing-toggle">
+        <button class="on" data-cycle="monthly">Monthly</button>
+        <button data-cycle="yearly">Yearly <small>save 2 months</small></button>
+      </div>
+
+      <div class="plans">
+        <div class="plan">
+          <h3>Free</h3>
+          <p class="price"><span>$0</span></p>
+          <p class="plan-sub">For your first few invoices</p>
+          <ul>
+            <li>Unlimited invoices</li>
+            <li>PDF download</li>
+            <li>40+ currencies, tax & discounts</li>
+            <li class="no">“Made with Soma” footer</li>
+            <li class="no">No logo or brand colors</li>
+          </ul>
+          <a href="#generator" class="btn btn-ghost btn-block">Use free</a>
+        </div>
+
+        <div class="plan featured">
+          <span class="ribbon">Most popular</span>
+          <h3>Pro</h3>
+          <p class="price"><span data-m="$9" data-y="$90">$9</span><small data-m="/month" data-y="/year">/month</small></p>
+          <p class="plan-sub">For freelancers who want to look pro</p>
+          <ul>
+            <li>Everything in Free</li>
+            <li><b>Remove Soma branding</b></li>
+            <li>Upload your logo</li>
+            <li>Brand colors</li>
+            <li>Save unlimited clients</li>
+            <li>Auto-numbered invoices</li>
+            <li>No ads</li>
+          </ul>
+          <a class="btn btn-primary btn-block buy" data-plan="pro">Get Pro</a>
+          <p class="guarantee">14-day money-back guarantee</p>
+        </div>
+
+        <div class="plan">
+          <h3>Business</h3>
+          <p class="price"><span data-m="$29" data-y="$290">$29</span><small data-m="/month" data-y="/year">/month</small></p>
+          <p class="plan-sub">For small teams & agencies</p>
+          <ul>
+            <li>Everything in Pro</li>
+            <li>Up to 5 team members</li>
+            <li>Priority email support</li>
+            <li>Custom invoice templates on request</li>
+            <li>Early access to recurring billing</li>
+          </ul>
+          <a class="btn btn-ghost btn-block buy" data-plan="business">Get Business</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATE PACK (one-time product) -->
+  <section id="templates" class="pack">
+    <div class="wrap pack-inner">
+      <div>
+        <p class="eyebrow">One-time purchase</p>
+        <h2>The Freelancer Business Kit</h2>
+        <p class="lede">Everything you need to run the money side of freelancing — ready to edit in Google Docs, Word & Sheets.</p>
+        <ul class="checks">
+          <li>12 contract templates (design, dev, writing, consulting)</li>
+          <li>Proposal & quote templates that win clients</li>
+          <li>Late-payment reminder email scripts (3-step sequence)</li>
+          <li>Income & tax tracker spreadsheet</li>
+          <li>Rate calculator — know exactly what to charge</li>
+        </ul>
+        <div class="pack-buy">
+          <span class="pack-price"><s>$49</s> $19</span>
+          <a class="btn btn-primary btn-lg buy" data-plan="pack">Get the kit</a>
+        </div>
+        <p class="muted small">Instant download. Lifetime updates.</p>
+      </div>
+      <div class="pack-visual" aria-hidden="true">
+        <div class="doc d1">Contract</div>
+        <div class="doc d2">Proposal</div>
+        <div class="doc d3">Tax tracker</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="wrap narrow">
+      <h2 class="center">Questions</h2>
+      <details><summary>Is Soma really free?</summary><p>Yes. You can create and download unlimited invoices for free. Free invoices include a small “Made with Soma” footer. Pro removes it and adds your logo, colors and saved clients.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. Everything is stored privately in your browser. Nothing you type is sent to our servers.</p></details>
+      <details><summary>How do I download a PDF?</summary><p>Click “Download PDF” and choose “Save as PDF” as the destination in the print dialog.</p></details>
+      <details><summary>Can I cancel anytime?</summary><p>Yes. Cancel in one click from the billing portal — no questions asked. We also offer a 14-day money-back guarantee.</p></details>
+      <details><summary>Is it legal to use these invoices?</summary><p>Soma invoices contain all the standard fields. Tax rules vary by country, so check local requirements (e.g. VAT numbers) and add them in your details.</p></details>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="wrap narrow center">
+      <h2>Get paid on time, every time.</h2>
+      <p class="lede">One short email a week with freelancing money tips. Plus a free late-payment email template when you join.</p>
+      <form id="newsForm" class="news-form">
+        <input type="email" name="email" required placeholder="you@email.com" aria-label="Email address">
+        <button class="btn btn-primary">Send me the template</button>
+      </form>
+      <p id="newsMsg" class="small muted"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-inner">
+    <p><span class="logo-mark sm">S</span> © <span id="year"></span> Soma</p>
+    <nav>
+      <a href="legal.html#terms">Terms</a>
+      <a href="legal.html#privacy">Privacy</a>
+      <a href="legal.html#refunds">Refunds</a>
+      <a id="portalLink">Manage subscription</a>
+      <a id="supportLink">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Upgrade modal -->
+<dialog id="upgradeModal" class="modal">
+  <form method="dialog">
+    <h3>✨ That's a Pro feature</h3>
+    <p id="upgradeReason">Unlock your logo, brand colors, saved clients and remove Soma branding.</p>
+    <p class="price-inline"><b>$9/month</b> · cancel anytime · 14-day refund</p>
+    <div class="modal-actions">
+      <a class="btn btn-primary buy" data-plan="pro">Upgrade to Pro</a>
+      <button class="btn btn-link" value="close">Maybe later</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
