@@ -84,9 +84,9 @@
     const row = document.createElement("div");
     row.className = "item";
     row.innerHTML = `
-      <input placeholder="Description" class="d" aria-label="Description">
-      <input type="number" min="0" step="any" class="q" aria-label="Quantity">
-      <input type="number" min="0" step="any" class="r" aria-label="Rate">
+      <input placeholder="e.g. Logo design" class="d" aria-label="Description">
+      <input type="number" inputmode="decimal" min="0" step="any" class="q" aria-label="Quantity" placeholder="1">
+      <input type="number" inputmode="decimal" min="0" step="any" class="r" aria-label="Price per unit" placeholder="0.00">
       <button type="button" class="rm" aria-label="Remove item">×</button>`;
     $(".d", row).value = it.d; $(".q", row).value = it.q; $(".r", row).value = it.r;
     $(".rm", row).onclick = () => { row.remove(); if (!itemsEl.children.length) addItem(); render(); };
