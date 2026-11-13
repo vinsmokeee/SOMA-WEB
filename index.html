@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0c" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
   <title>Soma — Free Invoice Generator for Freelancers & Small Business</title>
   <meta name="description" content="Create professional invoices in 60 seconds. Free invoice generator — no signup. Download as PDF, send, and get paid faster.">
   <meta property="og:title" content="Soma — Free Invoice Generator">
   <meta property="og:description" content="Create a professional invoice in 60 seconds. No signup. Download as PDF.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231f6f5c'/><text x='16' y='23' font-family='Georgia' font-size='20' fill='white' text-anchor='middle'>S</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e0f11'/><text x='16' y='23' font-family='Georgia' font-size='20' fill='%23d6bc85' text-anchor='middle'>S</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="config.js"></script>
   <script type="application/ld+json">
@@ -36,18 +38,38 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <p class="eyebrow">Free · No signup · PDF in one click</p>
-      <h1>Send a professional invoice in <em>60 seconds</em>.</h1>
-      <p class="lede">Soma is the fastest way for freelancers and small businesses to bill clients and get paid. Fill it in, download the PDF, done.</p>
-      <div class="hero-cta">
-        <a href="#generator" class="btn btn-primary btn-lg">Create free invoice</a>
-        <a href="#pricing" class="btn btn-ghost btn-lg">See Pro features</a>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span>Free invoice generator · No signup</p>
+        <h1>Invoices that look as good as <em>your work.</em></h1>
+        <p class="lede">Create a polished, professional invoice in under a minute. Fill it in, download the PDF, and get paid.</p>
+        <div class="hero-cta">
+          <a href="#generator" class="btn btn-primary btn-lg">Create free invoice <span aria-hidden="true">→</span></a>
+          <a href="#pricing" class="btn btn-ghost btn-lg">See Pro</a>
+        </div>
+        <ul class="trust">
+          <li>Free forever</li>
+          <li>Private: stays in your browser</li>
+          <li>40+ currencies</li>
+        </ul>
       </div>
-      <ul class="trust">
-        <li>✓ 100% free to start</li>
-        <li>✓ Your data stays in your browser</li>
-        <li>✓ 40+ currencies</li>
-      </ul>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock">
+          <div class="mock-head">
+            <div class="mock-brand"><span class="mock-logo">N</span><div><b>Atelier Nord</b><small>Design &amp; Brand Studio</small></div></div>
+            <div class="mock-meta"><small>Invoice</small><b>No. 0142</b></div>
+          </div>
+          <div class="mock-to"><small>Billed to</small><b>Juniper Hotels Group</b></div>
+          <div class="mock-rows">
+            <p><span>Brand identity system</span><b>$2,400.00</b></p>
+            <p><span>Website design, 6 pages</span><b>$3,200.00</b></p>
+            <p><span>Photography direction</span><b>$850.00</b></p>
+          </div>
+          <div class="mock-total"><span>Total due</span><b>$6,450.00</b></div>
+          <div class="mock-foot"><span>Due 30 Nov</span><span>Thank you for your business.</span></div>
+        </div>
+        <div class="mock-chip"><span class="pdf">PDF</span> invoice-0142.pdf <small>ready</small></div>
+      </div>
     </div>
   </section>
 
@@ -55,7 +77,7 @@
   <section id="generator" class="generator">
     <div class="wrap">
       <div class="gen-head">
-        <h2>Invoice generator</h2>
+        <h2>Create your invoice</h2>
         <span class="plan-badge" id="planBadge">Free plan</span>
       </div>
 
@@ -103,11 +125,11 @@
           <fieldset class="pro-field">
             <legend>Template color <span class="pro-tag">PRO</span></legend>
             <div class="swatches" id="swatches">
-              <button type="button" data-c="#1f6f5c" style="--c:#1f6f5c" class="on" aria-label="Green"></button>
-              <button type="button" data-c="#1d4ed8" style="--c:#1d4ed8" aria-label="Blue"></button>
-              <button type="button" data-c="#111827" style="--c:#111827" aria-label="Black"></button>
-              <button type="button" data-c="#b4441f" style="--c:#b4441f" aria-label="Rust"></button>
-              <button type="button" data-c="#7c3aed" style="--c:#7c3aed" aria-label="Violet"></button>
+              <button type="button" data-c="#14171a" style="--c:#14171a" class="on" aria-label="Ink"></button>
+              <button type="button" data-c="#0f5b47" style="--c:#0f5b47" aria-label="Emerald"></button>
+              <button type="button" data-c="#1e3a6e" style="--c:#1e3a6e" aria-label="Navy"></button>
+              <button type="button" data-c="#9a7433" style="--c:#9a7433" aria-label="Brass"></button>
+              <button type="button" data-c="#6b2737" style="--c:#6b2737" aria-label="Burgundy"></button>
             </div>
           </fieldset>
 
@@ -162,16 +184,17 @@
   <section class="proof">
     <div class="wrap proof-grid">
       <!-- Swap in real customer testimonials once you have them. -->
-      <blockquote><h3>⚡ Done in a minute</h3><p>No Word templates, no spreadsheets. Fill in, download PDF, send.</p></blockquote>
-      <blockquote><h3>🔒 Private by design</h3><p>No account, no upload. Your invoice data never leaves your browser.</p></blockquote>
-      <blockquote><h3>🌍 Works everywhere</h3><p>40+ currencies, tax and discounts, on desktop or phone.</p></blockquote>
+      <blockquote><span class="kicker">01 · Speed</span><h3>Done in a minute</h3><p>No Word templates, no spreadsheets. Fill it in, download the PDF, send.</p></blockquote>
+      <blockquote><span class="kicker">02 · Privacy</span><h3>Private by design</h3><p>No account, no upload. Your invoice data never leaves your browser.</p></blockquote>
+      <blockquote><span class="kicker">03 · Global</span><h3>Works everywhere</h3><p>40+ currencies, tax and discounts, on desktop or phone.</p></blockquote>
     </div>
   </section>
 
   <!-- PRICING -->
   <section id="pricing" class="pricing">
     <div class="wrap">
-      <h2 class="center">Look professional. Get paid faster.</h2>
+      <p class="eyebrow center">Pricing</p>
+      <h2 class="center">Look established. <em>Get paid faster.</em></h2>
       <p class="center lede">Start free. Upgrade when your business does.</p>
       <div class="billing-toggle">
         <button class="on" data-cycle="monthly">Monthly</button>
@@ -271,7 +294,7 @@
   <!-- NEWSLETTER -->
   <section class="newsletter">
     <div class="wrap narrow center">
-      <h2>Get paid on time, every time.</h2>
+      <h2>Get paid on time, <em>every time.</em></h2>
       <p class="lede">One short email a week with freelancing money tips. Plus a free late-payment email template when you join.</p>
       <form id="newsForm" class="news-form">
         <input type="email" name="email" required placeholder="you@email.com" aria-label="Email address">

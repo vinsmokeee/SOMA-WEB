@@ -77,7 +77,7 @@
   const today = new Date();
   const iso = (d) => d.toISOString().slice(0, 10);
   const itemsEl = $("#items");
-  let color = "#1f6f5c";
+  let color = "#14171a";
   let logoData = null;
 
   function addItem(it = { d: "", q: 1, r: 0 }) {
@@ -138,7 +138,7 @@
     $("#pvTotal").textContent = money(sub - disc + tax);
 
     const pro = isPro();
-    $("#invoice").style.setProperty("--inv", pro ? color : "#1f6f5c");
+    $("#invoice").style.setProperty("--inv", pro ? color : "#14171a");
     const logo = $("#pvLogo");
     logo.hidden = !(pro && logoData);
     if (pro && logoData) logo.src = logoData;
