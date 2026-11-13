@@ -21,9 +21,9 @@ footer, so each invoice a free user sends advertises Soma to their client.
 index.html    landing page + invoice generator + pricing + FAQ
 styles.css    styles (light/dark, mobile, print → PDF)
 app.js        generator logic, Pro gating, upsells, checkout
-config.js     ← EDIT THIS: your Stripe links, sponsor, email
-success.html  page Stripe redirects to after payment (unlocks Pro)
-legal.html    terms, privacy, refund policy (required by Stripe)
+config.js     ← EDIT THIS: your checkout links, sponsor, email
+success.html  page Lemon Squeezy redirects to after payment (unlocks Pro)
+legal.html    terms, privacy, refund policy (needed for store approval)
 ```
 
 No build step and no server. It's plain HTML/CSS/JS.
