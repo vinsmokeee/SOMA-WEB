@@ -9,7 +9,7 @@
 
   // ---------- Plan state ----------
   // NOTE: a static site can't securely verify payment. Pro is unlocked via the
-  // Stripe success redirect (success.html). See README "Going further" for a
+  // checkout success redirect (success.html). See README "Going further" for a
   // backend-verified setup once revenue justifies it.
   const isPro = () => ["pro", "business"].includes(store.get("plan", "free"));
   function applyPlan() {
@@ -42,12 +42,12 @@
   // ---------- Checkout ----------
   let cycle = "monthly";
   function checkout(plan) {
-    const links = C.stripeLinks || {};
+    const links = C.paymentLinks || {};
     const key = cycle === "yearly" && links[plan + "Yearly"] ? plan + "Yearly" : plan;
     const url = links[key];
     track("checkout_click", { plan: key });
     if (!url || url.includes("REPLACE")) {
-      toast("Checkout isn't connected yet. Add your Stripe links in config.js.");
+      toast("Checkout isn't connected yet. Add your checkout links in config.js.");
       return;
     }
     location.href = url;

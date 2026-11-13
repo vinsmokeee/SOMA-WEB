@@ -28,25 +28,26 @@ legal.html    terms, privacy, refund policy (required by Stripe)
 
 No build step and no server. It's plain HTML/CSS/JS.
 
-## Launch checklist (about 30 minutes)
+## Launch checklist
 
-1. **Stripe:** create a free account. Create products for Pro (monthly and yearly
-   prices), Business (monthly and yearly) and the Business Kit. Create a
-   **Payment Link** for each one.
-   - In each link, under "After payment", set it to redirect to
-     `https://YOUR-DOMAIN/success.html?plan=pro` (`business` / `pack`).
-   - For the Business Kit, attach the file in the product's confirmation email,
-     or use Gumroad / Lemon Squeezy, which deliver files automatically.
-2. Paste the links into **`config.js`**. Turn on the Stripe **Customer Portal**
-   and paste its link too.
-3. **Deploy for free** using either option:
-   - GitHub Pages: in repo Settings → Pages, deploy from your branch, root folder.
-   - Netlify or Cloudflare Pages: drag and drop the folder.
-4. Optional: [Formspree](https://formspree.io) endpoint for newsletter signups → `config.js`.
-5. Optional: [Plausible](https://plausible.io) analytics. Add its script tag to
-   `index.html`. The `checkout_click`, `upsell_shown`, `invoice_download` and
-   `purchase` events are already wired.
-6. Review `legal.html` for your country and set your support email.
+Payments use [Lemon Squeezy](https://lemonsqueezy.com) because Stripe does not
+support sellers in Bhutan. Lemon Squeezy pays out to Bhutanese bank accounts.
+
+1. **Publish the site:** repo Settings → Pages → deploy from this branch, `/ (root)`.
+   The repo must be public for free GitHub Pages. Your site will be at
+   `https://vinsmokeee.github.io/SOMA-WEB/`.
+2. **Lemon Squeezy:** sign up, create a store, and complete identity verification
+   and payout setup (bank account in Bhutan).
+3. Create products: Pro (subscription, $9/month and $90/year variants), Business
+   ($29/month and $290/year), and the Business Kit ($19, single payment, attach
+   the files).
+4. For each product, set the confirmation button link to
+   `https://vinsmokeee.github.io/SOMA-WEB/success.html?plan=pro` (`business` / `pack`).
+5. Copy each product's checkout link into **`config.js`**, plus
+   `https://YOUR-STORE.lemonsqueezy.com/billing` as `customerPortal`.
+6. Test a purchase in Lemon Squeezy's test mode, then activate the store.
+7. Optional: [Formspree](https://formspree.io) endpoint for newsletter signups,
+   [Plausible](https://plausible.io) analytics, and review `legal.html`.
 
 ## Getting traffic
 

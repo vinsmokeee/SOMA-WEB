@@ -1,29 +1,27 @@
 /*
  * ===== SOMA MONETIZATION CONFIG =====
  * This is the ONLY file you must edit to start taking money.
+ * Payments go through Lemon Squeezy (https://lemonsqueezy.com), which pays out
+ * to Bhutanese bank accounts. Full steps are in README.md.
  *
- * 1. Create a free Stripe account: https://dashboard.stripe.com/register
- * 2. Products → create "Soma Pro" ($9/mo), "Soma Business" ($29/mo),
- *    "Soma Template Pack" ($19 one-time).
- *    Add yearly prices too: Pro $90/yr, Business $290/yr.
- * 3. For each, click "Create payment link". In the link's
- *    "After payment" settings choose "Don't show confirmation page" →
- *    redirect to:  https://YOUR-DOMAIN/success.html?plan=pro   (or business / pack)
- * 4. Paste the payment link URLs below.
+ * For each product in Lemon Squeezy: open it → "Share" → copy the checkout link,
+ * and paste it below. In the product's "Confirmation modal" settings, set the
+ * button link to  https://YOUR-SITE/success.html?plan=pro   (or business / pack).
  */
 window.SOMA_CONFIG = {
   brand: "Soma",
 
-  stripeLinks: {
-    pro:            "https://buy.stripe.com/REPLACE_WITH_PRO_MONTHLY_LINK",
-    proYearly:      "https://buy.stripe.com/REPLACE_WITH_PRO_YEARLY_LINK",       // $90/yr
-    business:       "https://buy.stripe.com/REPLACE_WITH_BUSINESS_MONTHLY_LINK",
-    businessYearly: "https://buy.stripe.com/REPLACE_WITH_BUSINESS_YEARLY_LINK",  // $290/yr
-    pack:     "https://buy.stripe.com/REPLACE_WITH_TEMPLATE_PACK_LINK"
+  paymentLinks: {
+    pro:            "REPLACE_WITH_PRO_MONTHLY_CHECKOUT_LINK",       // $9/month
+    proYearly:      "REPLACE_WITH_PRO_YEARLY_CHECKOUT_LINK",        // $90/year
+    business:       "REPLACE_WITH_BUSINESS_MONTHLY_CHECKOUT_LINK",  // $29/month
+    businessYearly: "REPLACE_WITH_BUSINESS_YEARLY_CHECKOUT_LINK",   // $290/year
+    pack:           "REPLACE_WITH_BUSINESS_KIT_CHECKOUT_LINK"       // $19 one-time
   },
 
-  // Optional: Stripe customer portal link so subscribers can manage/cancel.
-  customerPortal: "https://billing.stripe.com/p/login/REPLACE_ME",
+  // Where subscribers manage or cancel. Lemon Squeezy gives every store one:
+  // https://YOUR-STORE.lemonsqueezy.com/billing
+  customerPortal: "",
 
   // Email list (newsletter = repeat traffic). Free endpoint from https://formspree.io
   // e.g. "https://formspree.io/f/abcdwxyz". Leave empty to just store locally.
