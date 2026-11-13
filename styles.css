@@ -110,12 +110,13 @@ section { padding: 96px 0; }
   border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-.logo { display: flex; align-items: center; gap: .55em; font: 400 1.55rem/1 var(--serif); letter-spacing: -.01em; text-decoration: none; }
+.logo { display: flex; align-items: center; gap: .7em; text-decoration: none; }
+.logo-word { font: 600 1rem/1 var(--sans); letter-spacing: .32em; margin-right: -.32em; }
 .logo-mark {
-  display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px;
-  background: var(--ink); color: var(--bg); font: italic 400 1.05rem/1 var(--serif);
+  display: block; width: 34px; height: 34px; border-radius: 9px; object-fit: cover; background: #fefefe;
+  box-shadow: 0 0 0 1px var(--line), 0 2px 6px -2px rgba(0,0,0,.25);
 }
-.logo-mark.sm { width: 22px; height: 22px; font-size: .85rem; border-radius: 6px; vertical-align: middle; margin-right: 4px; }
+.logo-mark.sm { display: inline-block; width: 22px; height: 22px; border-radius: 6px; vertical-align: middle; margin-right: 8px; }
 .nav-links { display: flex; gap: 30px; }
 .nav-links a { text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 500; transition: color .2s; }
 .nav-links a:hover { color: var(--ink); }
