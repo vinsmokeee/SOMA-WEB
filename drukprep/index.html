@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0a09" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)">
+  <title>DrukPrep — BCSE Preliminary Exam Mock Tests for Bhutanese Graduates</title>
+  <meta name="description" content="Practise for the BCSE Preliminary Examination with timed mock tests, instant scores and clear explanations. English, logical reasoning, data interpretation and general awareness. Free test, no signup.">
+  <meta property="og:title" content="DrukPrep — Pass the BCSE Preliminary Exam">
+  <meta property="og:description" content="Timed BCSE mock tests with instant scores and explanations. Try a full mock test free.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236b1e1e'/><path d='M9 22V10h6a6 6 0 0 1 0 12z' fill='none' stroke='%23e9a54b' stroke-width='2.4'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1">
+  <script src="config.js?v=1"></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo"><span class="logo-mark" aria-hidden="true">D</span>DrukPrep</a>
+    <nav class="nav-links">
+      <a href="#tests">Mock tests</a>
+      <a href="#pass">Exam Pass</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#tests" class="btn btn-sm btn-primary">Start free test</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow"><span class="dot"></span>For BCSE candidates · No signup</p>
+        <h1>Pass the BCSE <em>Preliminary Exam.</em></h1>
+        <p class="lede">Timed mock tests in the real exam format, with instant scores and a clear explanation for every answer. Know exactly where you stand before exam day.</p>
+        <div class="hero-cta">
+          <a href="#tests" class="btn btn-primary btn-lg">Take a free mock test <span aria-hidden="true">→</span></a>
+          <a href="#pass" class="btn btn-ghost btn-lg">Get the Exam Pass</a>
+        </div>
+        <dl class="stats">
+          <div><dt>5,905</dt><dd>graduates registered for the PE in 2025</dd></div>
+          <div><dt>1,726</dt><dd>scored above the cut-off</dd></div>
+          <div><dt>55</dt><dd>the 2025 PE pass mark</dd></div>
+        </dl>
+        <p class="source">Figures: <a href="https://thebhutanese.bt/preliminary-examination-2025-sees-sharp-rise-in-registrants-but-vacancies-drop-by-nearly-half/" target="_blank" rel="noopener">The Bhutanese</a>, <a href="https://rcsc.gov.bt/2025/08/declaration-of-preliminary-examination-pe-result-for-bcse-2025/" target="_blank" rel="noopener">RCSC</a>.</p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="qcard">
+          <div class="qcard-top"><span>Logical reasoning</span><span class="timer-pill">18:42</span></div>
+          <p class="qcard-q">Find the next number: 3, 7, 15, 31, 63, ?</p>
+          <div class="qcard-opts">
+            <span>95</span><span>126</span><span class="right">127</span><span>129</span>
+          </div>
+          <p class="qcard-exp"><b>Correct.</b> Each term is double the previous plus 1: 63 × 2 + 1 = 127.</p>
+        </div>
+        <div class="score-chip"><b>78%</b><span>Your score · above pass mark</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tests" class="tests">
+    <div class="wrap">
+      <p class="eyebrow">Practice</p>
+      <h2>Mock tests</h2>
+      <p class="lede">Each test covers English, logical reasoning, data interpretation and general awareness, timed like the real exam. Your best score is saved on this device.</p>
+      <div class="test-list" id="testList"></div>
+      <p class="small muted note">Questions are written by DrukPrep in the style of the PE. Official past papers are free on the <a href="https://rcsc.gov.bt/preliminary-examination/" target="_blank" rel="noopener">RCSC website</a>; practise those too.</p>
+    </div>
+  </section>
+
+  <section id="pass" class="pass">
+    <div class="wrap pass-inner">
+      <div>
+        <p class="eyebrow">Exam Pass</p>
+        <h2>Everything you need, <em>one small price.</em></h2>
+        <ul class="checks">
+          <li>Every mock test on DrukPrep for the whole exam season</li>
+          <li>Instant scoring by section, against the pass mark</li>
+          <li>A worked explanation for every question</li>
+          <li>Works on any phone. Pay once with mBoB or BNB</li>
+        </ul>
+        <div class="price-row">
+          <span class="price">Nu. <b id="price">499</b></span>
+          <s id="oldPrice" class="muted"></s>
+        </div>
+        <p class="small muted">Less than one coaching class. One-time payment, no subscription.</p>
+      </div>
+
+      <div class="pay panel" id="payPanel">
+        <ol class="steps">
+          <li>
+            <h3>Scan &amp; pay</h3>
+            <p>Open mBoB, BNB mPay or any QR app and pay <b>Nu. <span class="js-price">499</span></b>.</p>
+            <div class="qr"><img id="qrImg" alt="Payment QR code"><p class="small" id="acct"></p></div>
+          </li>
+          <li>
+            <h3>Send your payment proof</h3>
+            <form id="proofForm" class="form">
+              <label>Full name<input name="name" required autocomplete="name"></label>
+              <label>Phone<input name="phone" required inputmode="tel" autocomplete="tel" placeholder="17xxxxxx"></label>
+              <label>Journal / reference number<input name="journal" required placeholder="From your payment receipt"></label>
+              <button class="btn btn-primary btn-block">Send on WhatsApp</button>
+            </form>
+          </li>
+          <li>
+            <h3>Enter your unlock code</h3>
+            <p class="small muted">We check the payment and reply with your code, usually within a few hours.</p>
+            <form id="codeForm" class="code-row">
+              <input name="code" placeholder="DRUK-XXXX-XXXX" autocapitalize="characters" autocomplete="off" aria-label="Unlock code" required>
+              <button class="btn btn-ghost">Unlock</button>
+            </form>
+            <p class="small" id="codeMsg" role="status"></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sponsor-band" id="sponsorBand">
+    <div class="wrap sponsor-inner">
+      <div>
+        <p class="eyebrow">For institutes</p>
+        <h2>Reach every BCSE candidate.</h2>
+        <p class="lede">Coaching centres, colleges and employers: feature your course or vacancy in front of thousands of graduates preparing for the civil service.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" id="sponsorLink" target="_blank" rel="noopener">Advertise with us</a>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="wrap narrow">
+      <h2 class="center">Questions</h2>
+      <details><summary>Is DrukPrep official or linked to the RCSC?</summary><p>No. DrukPrep is an independent practice site and is not affiliated with the Royal Civil Service Commission. Always check exam dates, rules and the syllabus in the official announcements on <a href="https://rcsc.gov.bt" target="_blank" rel="noopener">rcsc.gov.bt</a>.</p></details>
+      <details><summary>Which sections are covered?</summary><p>English, logical reasoning, data interpretation and general awareness. Dzongkha practice questions are being prepared and will be added to the Exam Pass at no extra cost.</p></details>
+      <details><summary>How do I pay?</summary><p>Scan the QR with mBoB, BNB mPay or any supported app, then send your journal number on WhatsApp using the form. We reply with your unlock code once the payment is confirmed.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. Enter your code once on your phone and the tests stay unlocked on that device. You can enter the same code on your own laptop too.</p></details>
+      <details><summary>What if I'm not happy?</summary><p>Message us on WhatsApp within 7 days of paying and we'll refund you.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-inner">
+    <p>© <span id="year"></span> DrukPrep · Independent, not affiliated with the RCSC.</p>
+    <a id="contactLink" target="_blank" rel="noopener">Contact on WhatsApp</a>
+  </div>
+</footer>
+
+<!-- Test runner -->
+<div class="runner" id="runner" hidden>
+  <header class="run-head">
+    <button class="btn btn-link" id="quitBtn">← Exit</button>
+    <div class="run-title"><b id="runTitle"></b><span id="runProgress" class="muted"></span></div>
+    <span class="timer-pill" id="timer">25:00</span>
+  </header>
+  <div class="run-bar"><span id="runBar"></span></div>
+  <div class="run-body wrap narrow" id="runBody"></div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="questions-free.js?v=1"></script>
+<script src="packs/index.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
