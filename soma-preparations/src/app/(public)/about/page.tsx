@@ -17,7 +17,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="About Soma"
           title="Helping Bhutanese graduates prepare with confidence."
-          description="Soma Preparations is an online examination preparation platform for graduates preparing for Bhutan's competitive examinations, starting with the Preliminary Examination and RCSC examinations."
+          description="Soma Preparations is an online platform for graduates preparing for the Bhutan Civil Service Examination (BCSE), conducted by the Royal Civil Service Commission, from Stage I, the Preliminary Examination, through Stage II, the Main Examination."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {values.map((v) => (
@@ -32,8 +32,8 @@ export default function AboutPage() {
         <div className="container-page max-w-3xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <h2 className="font-heading text-3xl text-foreground sm:text-4xl">Our long-term vision</h2>
           <p>
-            We want Soma to become a trusted place for examination preparation in Bhutan, and to grow beyond the PE and RCSC
-            examinations to other competitive and professional examinations.
+            We want Soma to become a trusted place for examination preparation in Bhutan, and to grow beyond the BCSE to other
+            competitive and professional examinations in Bhutan.
           </p>
           <p>
             As we grow, we aim to create opportunities for Bhutanese graduates in question development, subject research, editing and

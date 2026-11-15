@@ -13,7 +13,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExamPreview } from "@/components/site/exam-preview";
 import { SectionHeading } from "@/components/site/section-heading";
-import { examCategories, freeTier, premiumPackage, site } from "@/lib/site";
+import { StageCard } from "@/components/site/stage-card";
+import { bcse, bcseStages, freeTier, premiumPackage, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const examFeatures = [
@@ -41,13 +42,17 @@ export default function HomePage() {
             <h1 className="font-heading text-[2.9rem] leading-[1.02] tracking-[-0.02em] text-foreground sm:text-6xl lg:text-[4.4rem]">
               Your Preparation <span className="italic text-brand">Starts Here.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">{site.description}</p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/85 sm:text-xl">{bcse.headline}</p>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
+              Timed mock examinations for the Preliminary Examination, and written-answer practice with expert feedback for the
+              Main Examination.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/register" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
                 Start Practising <ArrowRight className="size-4" />
               </Link>
-              <Link href="/exams" className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
-                Explore Examinations
+              <Link href={bcse.href} className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
+                Explore BCSE Preparation
               </Link>
             </div>
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
@@ -62,46 +67,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* EXAMINATION CATEGORIES */}
-      <section id="exams" className="scroll-mt-20 border-t border-border bg-muted/40 py-20 sm:py-24">
+      {/* BCSE STAGES */}
+      <section id="bcse" className="scroll-mt-20 border-t border-border bg-muted/40 py-20 sm:py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="Examinations"
-            title="Choose your examination"
-            description="Structured preparation for Bhutan's competitive examinations, starting with the Preliminary Examination and RCSC examinations."
+            eyebrow="BCSE Preparation"
+            title="Two stages. One platform."
+            description="The Bhutan Civil Service Examination, conducted by the Royal Civil Service Commission, has two stages. Soma Preparations covers both."
           />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {examCategories.map((exam) => (
-              <article
-                key={exam.slug}
-                className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[0_1px_2px_rgba(16,24,20,.04)] transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(16,24,20,.35)] sm:p-8"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="grid h-11 min-w-11 place-items-center rounded-xl bg-primary px-3 text-sm font-semibold tracking-wider text-primary-foreground">
-                    {exam.code}
-                  </span>
-                  <Badge variant="outline" className="rounded-full text-xs font-medium text-muted-foreground">
-                    Mock tests & practice
-                  </Badge>
-                </div>
-                <h3 className="mt-6 font-heading text-3xl tracking-[-0.01em]">{exam.title}</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{exam.description}</p>
-                {exam.areas.length > 0 && (
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {exam.areas.map((a) => (
-                      <li key={a} className="rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80">
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Link
-                  href={exam.href}
-                  className={buttonVariants({ variant: "outline", size: "lg", className: "mt-8 h-11 self-start px-5 group-hover:border-foreground/30" })}
-                >
-                  {exam.cta} <ArrowRight className="size-4" />
-                </Link>
-              </article>
+            {bcseStages.map((stage) => (
+              <StageCard key={stage.slug} stage={stage} />
             ))}
           </div>
         </div>
@@ -113,7 +89,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="The examination experience"
             title="Practise the way you will be tested"
-            description="Soma's mock examinations are built to feel like sitting a real computer-based paper, on a laptop or on your phone."
+            description="PE mock examinations are built to feel like sitting a real computer-based paper, on a laptop or on your phone. ME practice focuses on written answers, model answers and expert feedback."
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {examFeatures.map(({ icon: Icon, title, text }) => (
@@ -236,8 +212,8 @@ export default function HomePage() {
               <Link href="/register" className={buttonVariants({ size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
                 Start Practising
               </Link>
-              <Link href="/exams" className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
-                Explore Examinations
+              <Link href={bcse.href} className={buttonVariants({ variant: "outline", size: "lg", className: "h-12 px-6 text-[0.95rem]" })}>
+                Explore BCSE Preparation
               </Link>
             </div>
           </div>

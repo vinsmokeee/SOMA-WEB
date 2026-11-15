@@ -2,15 +2,9 @@ import Link from "next/link";
 import { ArrowRight, ClipboardList, Info, Lock, Sparkles, Target, Trophy, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { examCategories, premiumPackage } from "@/lib/site";
+import { bcseStages, premiumPackage } from "@/lib/site";
 
-const subjects = [
-  "English communication",
-  "Dzongkha communication",
-  "Logic & analytical ability",
-  "Problem solving & data interpretation",
-  "General awareness & current affairs",
-];
+const subjects = bcseStages.find((s) => s.slug === "pe")!.coverage.items;
 
 const stats = [
   { label: "Attempts", icon: ClipboardList },
@@ -35,7 +29,7 @@ export default function DashboardPage() {
         <div>
           <p className="eyebrow">Welcome</p>
           <h1 className="mt-2 font-heading text-3xl tracking-[-0.01em] sm:text-4xl">Good to see you, student.</h1>
-          <p className="mt-2 text-muted-foreground">Pick an examination below and start with a free mock test.</p>
+          <p className="mt-2 text-muted-foreground">Start with Stage I, the Preliminary Examination, with a free mock test.</p>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-border px-4 py-3">
           <span className="grid size-9 place-items-center rounded-lg bg-muted">
@@ -63,18 +57,18 @@ export default function DashboardPage() {
         {/* Available examinations */}
         <section className="rounded-2xl border border-border bg-background p-6 sm:p-7">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-semibold">Available examinations</h2>
+            <h2 className="text-base font-semibold">BCSE preparation</h2>
           </div>
           <ul className="mt-5 space-y-3">
-            {examCategories.map((exam) => (
+            {bcseStages.map((exam) => (
               <li key={exam.slug} className="flex items-start gap-4 rounded-xl border border-border p-4 sm:items-center">
                 <span className="grid h-10 min-w-10 place-items-center rounded-lg bg-primary px-2 text-xs font-semibold tracking-wider text-primary-foreground">
                   {exam.code}
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="min-w-0">
-                    <p className="font-medium">{exam.title}</p>
-                    <p className="text-sm text-muted-foreground">Free sample and premium mock tests</p>
+                    <p className="font-medium">{exam.stage}: {exam.title}</p>
+                    <p className="text-sm text-muted-foreground">{exam.format}</p>
                   </div>
                   <Badge variant="outline" className="w-fit shrink-0 rounded-full text-xs text-muted-foreground">
                     Coming soon
@@ -118,7 +112,7 @@ export default function DashboardPage() {
 
         {/* Subject-wise performance: empty bars */}
         <section className="rounded-2xl border border-border bg-background p-6 sm:p-7">
-          <h2 className="text-base font-semibold">Subject-wise performance</h2>
+          <h2 className="text-base font-semibold">PE subject-wise performance</h2>
           <ul className="mt-5 space-y-4">
             {subjects.map((s) => (
               <li key={s}>

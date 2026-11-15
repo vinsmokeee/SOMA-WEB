@@ -1,13 +1,21 @@
 # SOMA PREPARATIONS
 
-Bhutan's online examination preparation platform: computer-based mock
-examinations, practice questions and performance insights for graduates
-preparing for the Preliminary Examination (PE) and RCSC examinations.
+Bhutan's online preparation platform for the **Bhutan Civil Service
+Examination (BCSE)**, which is conducted by the Royal Civil Service Commission
+(RCSC), covering both stages:
+
+- **Stage I: Preliminary Examination (PE)**: lessons, practice questions,
+  timed computer-based mock examinations, explanations and analytics.
+- **Stage II: Main Examination (ME)**: category- and paper-wise materials,
+  written-answer practice, model answers, rubrics, expert feedback and viva
+  preparation.
+
+Terminology and the data model: [`docs/EXAMINATION-ARCHITECTURE.md`](docs/EXAMINATION-ARCHITECTURE.md).
 
 *Prepare. Practice. Progress.*
 
-> Status: **Milestone 1 complete** (foundation, design system, homepage,
-> navigation, student dashboard layout). Accounts, the examination engine and
+> Status: **Milestone 1 complete**, including the BCSE structure correction
+> (PE and ME stages, origin labels, architecture doc). Accounts, the examination engine and
 > payments are not built yet. See [`CHECKLIST.md`](CHECKLIST.md).
 
 ---
@@ -83,7 +91,7 @@ soma-preparations/
 │   │   ├── globals.css               # design tokens (white / charcoal / forest green)
 │   │   ├── (public)/                 # marketing site: header + footer
 │   │   │   ├── page.tsx              # homepage
-│   │   │   ├── exams/                # categories + /exams/[slug]
+│   │   │   ├── bcse/                 # BCSE overview + /bcse/[stage] (pe, me)
 │   │   │   ├── about/ contact/ login/ register/ terms/ privacy/
 │   │   └── dashboard/                # student portal shell + pages
 │   ├── components/
@@ -92,8 +100,9 @@ soma-preparations/
 │   │   ├── dashboard/                # portal shell + navigation
 │   │   └── ui/                       # shadcn/ui components
 │   └── lib/
-│       ├── site.ts                   # brand, navigation, categories, pricing copy
+│       ├── site.ts                   # brand, navigation, BCSE stages, origin labels, pricing copy
 │       └── utils.ts                  # cn() class helper
+├── docs/EXAMINATION-ARCHITECTURE.md  # BCSE data model (PE + ME), verification rules
 ├── CHECKLIST.md                      # milestone progress
 └── .env.example
 ```
@@ -121,12 +130,25 @@ Brand copy, navigation, examination categories and pricing are edited in
 - Never claim an affiliation with the RCSC or any government agency. The
   footer disclaimer is required.
 
+## Content accuracy rules
+
+- RCSC is the institution; BCSE is the examination; PE and ME are its stages.
+  Never call ME "the RCSC exam".
+- Examination formats, papers, marks, durations and weightages are **data**,
+  entered by admins from current RCSC notices, never hardcoded.
+- Every item carries an origin label: *Official RCSC information* (with
+  source link), *Historical paper or format*, *Original Soma question* or
+  *Expert-created material*. Unverified official facts display as
+  *Pending verification with RCSC*.
+- Do not reproduce official examination papers commercially without
+  recorded permission.
+
 ## Testing done for Milestone 1
 
 - `npm run lint`, `npm run typecheck`, `npm run build`: all pass.
 - Browser checks (Playwright, production build) at 390 px, 820 px and
   1366 px: every page returns 200, no horizontal overflow, no console
-  errors, mobile menu opens and navigates, all 19 internal links resolve,
+  errors, mobile menu opens and navigates, all 20 internal links resolve, and no page uses "RCSC" as an examination name,
   manifest valid.
 
 ## Known items
@@ -138,7 +160,7 @@ Brand copy, navigation, examination categories and pricing are edited in
   `border-*` colour conflicts, so the project uses the standard
   `clsx` + `tailwind-merge` instead.
 
-## Deployment (Milestone 7)
+## Deployment (Milestone 8)
 
 Vercel → *Add New Project* → import the GitHub repository → set **Root
 Directory** to `soma-preparations` → add environment variables → Deploy.
