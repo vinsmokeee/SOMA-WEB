@@ -67,6 +67,8 @@
   let T, ans, cur, deadline, tick;
   const runner = $("#runner"), body = $("#runBody");
   const keys = ["A", "B", "C", "D", "E"];
+  const dzKeys = ["ཀ", "ཁ", "ག", "ང"];
+  const keyFor = (q, i) => (q.s === "Dzongkha" ? dzKeys : keys)[i];
 
   function start(test) {
     T = { ...test, done: false }; ans = new Array(test.questions.length).fill(null); cur = 0;
@@ -128,8 +130,8 @@
     body.innerHTML = `
       <p class="q-sec">${esc(q.s)}</p>
       ${groupHTML(T, q)}
-      <p class="q-text">${esc(q.q)}</p>
-      <div class="opts">${q.o.map((o, i) => `<button class="opt ${ans[cur] === i ? "sel" : ""}" data-i="${i}"><span class="k">${keys[i]}</span>${esc(o)}</button>`).join("")}</div>
+      <p class="q-text${q.s === "Dzongkha" ? " dz" : ""}">${esc(q.q)}</p>
+      <div class="opts${q.s === "Dzongkha" ? " dz" : ""}">${q.o.map((o, i) => `<button class="opt ${ans[cur] === i ? "sel" : ""}" data-i="${i}"><span class="k">${keyFor(q, i)}</span>${esc(o)}</button>`).join("")}</div>
       <div class="run-nav">
         <button class="btn btn-ghost" id="prevBtn" ${cur === 0 ? "disabled" : ""}>← Back</button>
         ${cur < n - 1 ? `<button class="btn btn-primary" id="nextBtn">Next →</button>` : `<button class="btn btn-primary" id="finishBtn">Submit test</button>`}
@@ -168,8 +170,8 @@
       <p class="muted">Focus next on <b>${esc(weakest)}</b>, your weakest section in this test.</p>
       ${T.id === "free" && !code ? `<div class="upsell"><h3>Keep practising with the Exam Pass</h3><p>More full mock tests with explanations, for Nu. ${C.price}, paid with mBoB or BNB.</p><button class="btn btn-primary" id="upsellBtn">Get the Exam Pass</button></div>` : ""}
       <div class="review"><h3>Review answers</h3>${qs.map((q, i) => `
-        ${q.g && (i === 0 || qs[i - 1].g !== q.g) ? `<div class="rev-group">${groupHTML(T, q)}</div>` : ""}<div class="rev"><p class="q-sec">${i + 1} · ${esc(q.s)}</p><p class="q-text">${esc(q.q)}</p>
-          <div class="opts">${q.o.map((o, k) => `<div class="opt ${k === q.a ? "right" : k === ans[i] ? "wrong" : ""}"><span class="k">${keys[k]}</span>${esc(o)}</div>`).join("")}</div>
+        ${q.g && (i === 0 || qs[i - 1].g !== q.g) ? `<div class="rev-group">${groupHTML(T, q)}</div>` : ""}<div class="rev"><p class="q-sec">${i + 1} · ${esc(q.s)}</p><p class="q-text${q.s === "Dzongkha" ? " dz" : ""}">${esc(q.q)}</p>
+          <div class="opts${q.s === "Dzongkha" ? " dz" : ""}">${q.o.map((o, k) => `<div class="opt ${k === q.a ? "right" : k === ans[i] ? "wrong" : ""}"><span class="k">${keyFor(q, k)}</span>${esc(o)}</div>`).join("")}</div>
           <p class="exp">${ans[i] == null ? "<b>Not answered.</b> " : ""}${esc(q.e)}</p></div>`).join("")}</div>
       <div class="run-nav"><span></span><button class="btn btn-primary" id="doneBtn">Back to tests</button></div>`;
     runner.scrollTop = 0;
