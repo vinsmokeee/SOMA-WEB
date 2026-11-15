@@ -112,7 +112,7 @@
     for (let i = 0; i <= 4; i++) { const v = +(min + (max - min) / 4 * i).toFixed(2); svg += `<line x1="${L}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}" class="grid"/><text x="${L - 6}" y="${y(v) + 4}" class="ax" text-anchor="end">${v}</text>`; }
     if (g.ref != null) svg += `<line x1="${L}" x2="${W - 4}" y1="${y(g.ref)}" y2="${y(g.ref)}" class="ref"/>`;
     svg += `<polyline fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round" points="${vals.map((v, i) => `${xs(i)},${y(v)}`).join(" ")}"/>`;
-    vals.forEach((v, i) => { svg += `<circle cx="${xs(i)}" cy="${y(v)}" r="4" fill="var(--gold)"/><text x="${xs(i)}" y="${y(v) - 9}" class="val" text-anchor="middle">${Number.isInteger(v) ? v.toFixed(1) : v}</text><text x="${xs(i)}" y="${H - 12}" class="ax" text-anchor="middle">${esc(g.labels[i])}</text>`; });
+    vals.forEach((v, i) => { svg += `<circle cx="${xs(i)}" cy="${y(v)}" r="4" fill="var(--gold)"/><text x="${xs(i)}" y="${y(v) - 9}" class="val" text-anchor="middle">${Number.isInteger(v) && vals.some((x) => !Number.isInteger(x)) ? v.toFixed(1) : v}</text><text x="${xs(i)}" y="${H - 12}" class="ax" text-anchor="middle">${esc(g.labels[i])}</text>`; });
     return chartWrap(g, svg, W, H);
   }
   const chartWrap = (g, svg, W, H) => `<figure class="chart"><figcaption>${esc(g.title)}</figcaption><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(g.title)}">${svg}</svg>${g.series.length > 1 ? `<div class="legend">${g.series.map((s, k) => `<span><i style="background:${PALETTE[k]}"></i>${esc(s.name)}</span>`).join("")}</div>` : ""}</figure>`;
