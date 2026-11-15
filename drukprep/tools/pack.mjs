@@ -43,10 +43,11 @@ if (mode === "encrypt") {
     const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
     const data = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await key(salt), new TextEncoder().encode(JSON.stringify(test)));
     writeFileSync(join(packsDir, test.id + ".json"), JSON.stringify({ v: 1, salt: b64(salt), iv: b64(iv), data: b64(new Uint8Array(data)) }));
-    index.push({ id: test.id, title: test.title, minutes: test.minutes, count: test.questions.length });
+    index.push({ id: test.id, title: test.title, minutes: test.minutes, count: test.questions.length, sections: new Set(test.questions.map((q) => q.s)).size, kind: test.kind || "practice" });
     console.log(`encrypted ${f} → packs/${test.id}.json (${test.questions.length} questions)`);
   }
   // Public list of locked tests (titles only, no questions)
+  index.sort((a, b) => (a.kind === "full" ? 0 : 1) - (b.kind === "full" ? 0 : 1) || a.id.localeCompare(b.id, undefined, { numeric: true }));
   writeFileSync(join(packsDir, "index.js"), "window.DP_PACKS = " + JSON.stringify(index, null, 2) + ";\n");
   console.log("wrote packs/index.js");
 } else {

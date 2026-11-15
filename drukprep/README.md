@@ -73,3 +73,16 @@ instead (the site already does).
 - The site promises a 7-day refund and replies "within a few hours". Keep
   both promises, or edit the FAQ and payment text.
 - Keep the "not affiliated with the RCSC" wording. Don't use RCSC logos.
+
+## Test file format (for adding exams)
+
+Each file in `private/` is one test. Full exams use `"kind": "full"` and
+1.5 minutes per question (the real PE pace: 100 questions in 150 minutes).
+Shared material goes in `groups` and questions point to it with `"g"`:
+
+- `{"type": "passage", "title": "...", "text": "para 1\n\npara 2"}`
+- `{"type": "bar", "title": "...", "labels": [...], "series": [{"name": "2024", "values": [...]}]}`
+- `{"type": "line", "title": "...", "labels": [...], "series": [{"values": [...]}], "ref": 1}`
+- `{"type": "table", "title": "...", "head": [...], "rows": [[...]]}`
+
+Questions: `{"s": "English", "g": "p1", "q": "...", "o": [4 options], "a": 0-3, "e": "explanation"}`.

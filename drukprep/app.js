@@ -45,9 +45,9 @@
       const locked = !t.free && !code;
       const b = best[t.id];
       return `<article class="test">
-        <div class="test-top"><span class="tag ${t.free ? "free" : locked ? "lock" : "free"}">${t.free ? "Free" : locked ? "Exam Pass" : "Unlocked"}</span>${b != null ? `<p class="best">Best <b>${b}%</b></p>` : ""}</div>
+        <div class="test-top"><span class="tag ${t.free ? "free" : locked ? "lock" : "free"}">${t.free ? "Free" : locked ? "Exam Pass" : "Unlocked"}</span>${t.kind === "full" ? `<span class="tag full">Full exam</span>` : ""}${b != null ? `<p class="best">Best <b>${b}%</b></p>` : ""}</div>
         <h3>${esc(t.title)}</h3>
-        <p class="meta">${t.count} questions · ${t.minutes} minutes · 4 sections</p>
+        <p class="meta">${t.count} questions · ${t.minutes} minutes · ${t.sections || 4} sections</p>
         <button class="btn ${locked ? "btn-ghost" : "btn-primary"}" data-id="${t.id}">${locked ? "Unlock with Exam Pass" : b != null ? "Retake test" : "Start test"}</button>
       </article>`;
     }).join("");
@@ -84,13 +84,50 @@
   }
   const dataTable = (d) => `<table class="dtable"><caption>${esc(d.title)}</caption><thead><tr>${d.head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${d.rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 
+  // ---------- Shared material: passages, charts, tables ----------
+  const PALETTE = ["var(--gold)", "var(--brand-2)"];
+  function barChart(g) {
+    const W = 420, H = 260, L = 40, B = 34, T = 16, max = g.max || Math.ceil(Math.max(...g.series.flatMap((s) => s.values)) / 20) * 20;
+    const n = g.labels.length, gw = (W - L - 8) / n, bw = Math.min(26, (gw - 14) / g.series.length);
+    const y = (v) => T + (H - T - B) * (1 - v / max);
+    let svg = "";
+    for (let i = 0; i <= 4; i++) { const v = max / 4 * i; svg += `<line x1="${L}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}" class="grid"/><text x="${L - 6}" y="${y(v) + 4}" class="ax" text-anchor="end">${v}</text>`; }
+    g.labels.forEach((lab, i) => {
+      const x0 = L + i * gw + (gw - bw * g.series.length) / 2;
+      g.series.forEach((s, k) => {
+        const v = s.values[i], x = x0 + k * bw;
+        svg += `<rect x="${x + 1}" y="${y(v)}" width="${bw - 2}" height="${y(0) - y(v)}" rx="2" fill="${PALETTE[k]}"/><text x="${x + bw / 2}" y="${y(v) - 4}" class="val" text-anchor="middle">${v}</text>`;
+      });
+      svg += `<text x="${L + i * gw + gw / 2}" y="${H - 12}" class="ax" text-anchor="middle">${esc(lab)}</text>`;
+    });
+    return chartWrap(g, svg, W, H);
+  }
+  function lineChart(g) {
+    const W = 420, H = 250, L = 40, B = 34, T = 18, vals = g.series[0].values;
+    const max = g.max || Math.ceil(Math.max(...vals) * 10 / 5) * 5 / 10 + .2, min = g.min ?? 0;
+    const n = g.labels.length, xs = (i) => L + 18 + i * (W - L - 40) / (n - 1), y = (v) => T + (H - T - B) * (1 - (v - min) / (max - min));
+    let svg = "";
+    for (let i = 0; i <= 4; i++) { const v = +(min + (max - min) / 4 * i).toFixed(2); svg += `<line x1="${L}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}" class="grid"/><text x="${L - 6}" y="${y(v) + 4}" class="ax" text-anchor="end">${v}</text>`; }
+    if (g.ref != null) svg += `<line x1="${L}" x2="${W - 4}" y1="${y(g.ref)}" y2="${y(g.ref)}" class="ref"/>`;
+    svg += `<polyline fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round" points="${vals.map((v, i) => `${xs(i)},${y(v)}`).join(" ")}"/>`;
+    vals.forEach((v, i) => { svg += `<circle cx="${xs(i)}" cy="${y(v)}" r="4" fill="var(--gold)"/><text x="${xs(i)}" y="${y(v) - 9}" class="val" text-anchor="middle">${Number.isInteger(v) ? v.toFixed(1) : v}</text><text x="${xs(i)}" y="${H - 12}" class="ax" text-anchor="middle">${esc(g.labels[i])}</text>`; });
+    return chartWrap(g, svg, W, H);
+  }
+  const chartWrap = (g, svg, W, H) => `<figure class="chart"><figcaption>${esc(g.title)}</figcaption><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(g.title)}">${svg}</svg>${g.series.length > 1 ? `<div class="legend">${g.series.map((s, k) => `<span><i style="background:${PALETTE[k]}"></i>${esc(s.name)}</span>`).join("")}</div>` : ""}</figure>`;
+  const passage = (g) => `<div class="passage"><p class="passage-title">${esc(g.title)}</p>${g.text.split(/\n\n+/).map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
+  function groupHTML(test, q) {
+    const g = q.g && test.groups && test.groups[q.g];
+    if (g) return g.type === "passage" ? passage(g) : g.type === "bar" ? barChart(g) : g.type === "line" ? lineChart(g) : dataTable(g);
+    return q.s === "Data interpretation" && test.data ? dataTable(test.data) : "";
+  }
+
   function renderQ() {
     const q = T.questions[cur], n = T.questions.length;
     $("#runProgress").textContent = `Question ${cur + 1} of ${n}`;
     $("#runBar").style.width = ((ans.filter((a) => a != null).length) / n * 100) + "%";
     body.innerHTML = `
       <p class="q-sec">${esc(q.s)}</p>
-      ${q.s === "Data interpretation" && T.data ? dataTable(T.data) : ""}
+      ${groupHTML(T, q)}
       <p class="q-text">${esc(q.q)}</p>
       <div class="opts">${q.o.map((o, i) => `<button class="opt ${ans[cur] === i ? "sel" : ""}" data-i="${i}"><span class="k">${keys[i]}</span>${esc(o)}</button>`).join("")}</div>
       <div class="run-nav">
@@ -131,7 +168,7 @@
       <p class="muted">Focus next on <b>${esc(weakest)}</b>, your weakest section in this test.</p>
       ${T.id === "free" && !code ? `<div class="upsell"><h3>Keep practising with the Exam Pass</h3><p>More full mock tests with explanations, for Nu. ${C.price}, paid with mBoB or BNB.</p><button class="btn btn-primary" id="upsellBtn">Get the Exam Pass</button></div>` : ""}
       <div class="review"><h3>Review answers</h3>${qs.map((q, i) => `
-        <div class="rev"><p class="q-sec">${i + 1} · ${esc(q.s)}</p><p class="q-text">${esc(q.q)}</p>
+        ${q.g && (i === 0 || qs[i - 1].g !== q.g) ? `<div class="rev-group">${groupHTML(T, q)}</div>` : ""}<div class="rev"><p class="q-sec">${i + 1} · ${esc(q.s)}</p><p class="q-text">${esc(q.q)}</p>
           <div class="opts">${q.o.map((o, k) => `<div class="opt ${k === q.a ? "right" : k === ans[i] ? "wrong" : ""}"><span class="k">${keys[k]}</span>${esc(o)}</div>`).join("")}</div>
           <p class="exp">${ans[i] == null ? "<b>Not answered.</b> " : ""}${esc(q.e)}</p></div>`).join("")}</div>
       <div class="run-nav"><span></span><button class="btn btn-primary" id="doneBtn">Back to tests</button></div>`;

@@ -1,8 +1,8 @@
 /* Free sample mock test — visible to everyone. Original questions (not copied from RCSC papers). */
 window.DP_FREE = {
   id: "free",
-  title: "Free Mock Test",
-  minutes: 25,
+  title: "Free Quick Test",
+  minutes: 30,
   data: {
     title: "Sales of a fruit cooperative, in Nu. thousand (fictional data)",
     head: ["Year", "Apples", "Oranges"],
