@@ -68,8 +68,8 @@ instead (the site already does).
   it on. Change the code each exam season (decrypt with the old code, encrypt
   with the new one). Once you have revenue, a small backend with one code per
   buyer would stop sharing.
-- **Before you charge**, add more tests. Aim for at least 5 full mock tests
-  plus Dzongkha questions, because the FAQ promises Dzongkha will be added.
+- **Before you charge**: 5 paid mock tests are published (100 questions). Still
+  needed: Dzongkha questions, because the FAQ promises Dzongkha will be added.
 - The site promises a 7-day refund and replies "within a few hours". Keep
   both promises, or edit the FAQ and payment text.
 - Keep the "not affiliated with the RCSC" wording. Don't use RCSC logos.
