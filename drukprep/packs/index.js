@@ -10,9 +10,9 @@ window.DP_PACKS = [
   {
     "id": "exam2",
     "title": "Full Mock Exam 2",
-    "minutes": 120,
-    "count": 80,
-    "sections": 4,
+    "minutes": 150,
+    "count": 100,
+    "sections": 5,
     "kind": "full"
   },
   {
